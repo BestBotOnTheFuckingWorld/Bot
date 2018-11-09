@@ -2,3 +2,11 @@
 \.idea/
 
 Bot\.iml
+
+config\.json
+
+*.jar
+
+*.class
+
+src/META-INF/

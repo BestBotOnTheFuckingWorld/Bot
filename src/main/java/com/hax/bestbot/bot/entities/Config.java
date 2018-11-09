@@ -1,4 +1,4 @@
-package com.hax.bestbot.bot.core;
+package com.hax.bestbot.bot.entities;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -10,6 +10,8 @@ import org.slf4j.LoggerFactory;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.Arrays;
+import java.util.List;
 
 public class Config {
 
@@ -19,15 +21,21 @@ public class Config {
     @SerializedName("DISCORD_TOKEN")
     @Expose
     private String discordToken;
-    @SerializedName("GITHUB_OAUTH")
-    @Expose
-    private String githubToken;
     @SerializedName("BOTNAME")
     @Expose
     private String botName;
     @SerializedName("SHARDS")
     @Expose
     private int shards;
+    @SerializedName("PLUGINSFOLDER")
+    @Expose
+    private String pluginsFolder;
+    @SerializedName("PREFIX")
+    @Expose
+    private String prefix;
+    @SerializedName("BOTOWNERS")
+    @Expose
+    private String[] botowners;
 
     private static final Logger logger = LoggerFactory.getLogger(Config.class);
     private Gson gson;
@@ -67,9 +75,10 @@ public class Config {
     private void setDefaultValues() {
         this.discordToken = "Your DiscordToken";
         this.telegramToken = "Your TelegramToken";
-        this.githubToken = "Your GithubToken";
         this.botName = "Your Botname";
         this.shards = 1;
+        this.pluginsFolder = "./plugins/";
+        this.prefix = "-";
     }
 
     private void createConfig() {
@@ -89,7 +98,7 @@ public class Config {
     }
 
     private boolean verifyConfig() {
-        return !(this.discordToken == null || this.telegramToken == null || this.githubToken == null);
+        return !(this.discordToken == null || this.telegramToken == null);
     }
 
     public String getTelegramToken() {
@@ -100,15 +109,27 @@ public class Config {
         return discordToken;
     }
 
-    public String getGithubToken() {
-        return githubToken;
-    }
-
     public String getBotName() {
         return botName;
     }
 
     public int getShards() {
         return shards;
+    }
+
+    public String getPluginsFolder() {
+        return pluginsFolder;
+    }
+
+    public String getPrefix() {
+        return prefix;
+    }
+
+    public String[] getBotowners() {
+        return botowners;
+    }
+
+    public List<String> getBotownersAsList() {
+        return Arrays.asList(botowners);
     }
 }
